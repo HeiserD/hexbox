@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HexBox</title>
+
+    <link rel="apple-touch-icon" href="hexagon.png">
+
+    <link rel="icon" href="hexagon.png" type="image/png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="hexbox.js"></script>
+    <style>
+        .quiz {
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #eee;
+            border-left-width: 7px;
+            border-radius: 3px;
+        }
+        
+        .correct {
+            border-left-color: green;
+        }
+        
+        .incorrect {
+            border-left-color: red;
+        }
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        
+        .row.content {
+            height: 450px
+        }
+        /* Set gray background color and 100% height */
+        
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+        /* Set black background color, white text and some padding */
+        
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+-->
+    <br />
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel with-nav-tabs panel-default">
+                    <div class="panel-heading">
+                        <h1>HexBox</h1>
+                        <h4>Learn Binary & Hexidecimal</h4>
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1default" data-toggle="tab">Quiz</a></li>
+                            <li><a href="#tab2default" data-toggle="tab">Converter</a></li>
+                            <li><a href="#tab3default" data-toggle="tab">Tutorial</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1default">
+                                <!-- THIS IS WHERE TAB ONE STUFF STARTS -->
+
+                                <div class="well well-lg">
+                                    <h1 id="quiz_well"></h1>
+                                </div>
+
+
+                                <h3>Enter your answers below</h3>
+
+                                <div class="quiz" id="quiz_int">
+                                    <div class="form-group" id="int_group">
+                                        <label for="int_tb">Decimal:</label>
+                                        <input type="text" class="form-control" id="int_tb">
+                                    </div>
+                                </div>
+
+                                <div class="quiz" id="quiz_bin">
+                                    <div class="form-group" id="bin_group">
+                                        <label for="bin_tb">Binary:</label>
+                                        <input type="text" class="form-control" id="bin_tb">
+                                    </div>
+                                </div>
+
+                                <div class="quiz" id="quiz_hex">
+                                    <div class="form-group" id="hex_group">
+                                        <label for="hex_tb">Hex:</label>
+                                        <input type="text" class="form-control" id="hex_tb">
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary btn-md col-sm-12 col-xs-12 col-md-12 col-lg-12" id="btn_quiz_ans">Check Answers</button>
+                                <br />
+                                <br />
+                                <button type="button" class="btn btn-success btn-md col-sm-12 col-xs-12 col-md-12 col-lg-12" id="btn_quiz_new">New Number</button>
+
+
+
+                                <!-- THIS IS WHERE TAB ONE STUFF ENDS -->
+                            </div>
+                            <div class="tab-pane fade" id="tab2default">
+                                <!-- THIS IS WHERE TAB TWO STUFF STARTS -->
+
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" id="convert_base" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Decimal <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a>Decimal</a></li>
+                                                    <li><a>Binary</a></li>
+                                                    <li><a>Hex</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- /btn-group -->
+                                            <input type="text" id="convert_num" class="form-control" aria-label="...">
+                                        </div>
+                                        <!-- /input-group -->
+                                    </div>
+                                    <!-- /.col-lg-6 -->
+                                </div>
+                                <!-- /.row -->
+
+                                <br />
+
+                                <button type="button" id="btn_convert" class="btn btn-primary col-sm-12 col-xs-12 col-md-12 col-lg-12">Convert</button>
+
+                                <br />
+                                <br />
+
+
+                                <div class="form-group">
+                                    <label for="int_tb">Integer:</label>
+                                    <input type="text" class="form-control" id="int_tb_con">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bin_tb">Binary:</label>
+                                    <input type="text" class="form-control" id="bin_tb_con">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="hex_tb">Hex:</label>
+                                    <input type="text" class="form-control" id="hex_tb_con">
+                                </div>
+
+
+
+
+
+
+
+
+
+                                <!-- THIS IS WHERE TAB TWO STUFF ENDS -->
+                            </div>
+                            <div class="tab-pane fade" id="tab3default">
+                                <!-- THIS IS WHERE TAB THREE STUFF STARTS -->
+
+                                <p>
+                                    <b>Decimal to Binary</b>
+                                    <br /> Binary follows the same pattern as Decimal except that instead of being base 10, it is instead base 2. Instead of having 10 symbols to represent values we have two ( 0 and 1 ). So Decimal is a base 10 number system, we have 10 symbols and multiply by powers of 10. It follows that Binary is a base 2 number system, we have two symbols and multiply by powers of 2. for example A 4 bits binary would be
+                                    <br />
+                                    <br /> 0 : 0 0 0 0
+                                    <br /> 1 : 0 0 0 1
+                                    <br /> 2 : 0 0 1 0
+                                    <br /> 3 : 0 0 1 1
+                                    <br /> 4 : 0 1 0 0
+                                    <br /> 5 : 0 1 0 1
+                                    <br /> 6 : 0 1 1 0
+                                    <br /> 7 : 0 1 1 1
+                                    <br /> 8 : 1 0 0 0
+                                    <br /> 9 : 1 0 0 1
+                                    <br /> 10 : 10 1 0
+
+                                    <br /> 11 : 1 0 1 1
+                                    <br /> 12 : 1 1 0 0
+                                    <br /> 13 : 1 1 0 1
+                                    <br /> 14: 1 1 1 0
+                                    <br /> 15: 1 1 1 1
+                                    <br />
+
+
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+
+                                    <b>Decimal to Hex</b>
+                                    <br /> The hexadecimal numeral system, also known as just hex, is a numeral system made up of 16 symbols (base 16). The standard numeral system is called decimal (base 10) and uses ten symbols: 0,1,2,3,4,5,6,7,8,9. Hexadecimal uses the decimal numbers and includes six extra symbols. There are no symbols that mean ten, or eleven etc. so these symbols are letters taken from the English alphabet: A, B, C, D, E and F. Hexadecimal A = decimal 10, and hexadecimal F = decimal 15. For example .
+                                    <br />
+                                    <br /> 0 : 0
+                                    <br /> 1 : 1
+                                    <br /> 2 : 2
+                                    <br /> 3 : 3
+                                    <br /> 4 : 4
+                                    <br /> 5 : 5
+                                    <br /> 6 : 6
+                                    <br /> 7 : 7
+                                    <br /> 8 : 8
+                                    <br /> 9 : 9
+                                    <br /> 10 : A
+                                    <br /> 11 : B
+                                    <br /> 12 : C
+                                    <br /> 13 : D
+                                    <br /> 14 : E
+                                    <br /> 15 : F
+                                    <br /> 16 : 10
+                                    <br /> 17 : 11
+                                    <br /> 18 : 12
+                                    <br /> 19 : 13
+                                    <br /> 20 : 14
+                                    <br /> 21 : 15
+                                    <br /> 22 : 16
+                                    <br /> 23 : 17
+                                    <br /> 24 : 18
+                                    <br /> 25 : 19
+                                    <br /> 26 : 1A
+                                    <br /> 27 : 1B
+                                    <br /> 28 : 1C
+                                    <br /> 29 : 1 D
+                                    <br />
+
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+
+                                    <b>Hex to Decimals</b>
+                                    <br /> Example 1 This is how to convert hexadecimal to decimal manually. You must start by multiplying the hex number by 16. Which will be raised to a power that increases by 1 (the power at which the hexadecimal is raised starts at zero 0), by the hexadecimal number decimal equivalent. We start from the right of the hexadecimal number and go to the left when applying the powers. Each time you multiply a number by 16 the power of 16 increases. I know this might seen confusing that is why i will provide examples! When converting C9 hexadecimal to decimal your working should look something like this: Multiplication Result 9 = 9 * (16 ^ 0) = 9 C = 12 * (16 ^ 1) = 192 We then add the results. 192 + 9 = 20110 decimal. First we converted all of our hex numbers to its decimal equivalents. C is equal to decimal 12 (refer to table above) and 9 is equal to decimal 9. We then multiplied the numbers 12 and 9 starting from the last number in the question, by 16 and its power. Remember the powers start from zero. Our first multiplication has a power of 0 and the second multiplication has a power of 1. If there was a third it would have a power of 2 and 4 a power of 3 etc.... The stars (^) in the bracket represent 'raised to the power of'. Therefore, the first terms in brackets read, 'sixteen to the power of 0'. What this means is that sixteen is multiplying by itself zero times. Anything raised to the power of zero is 1. Therefore, 9 is being multiplied by one. In the second bracket the terms read as, 'sixteen to the power of one'. A number raised to the power of one is equal to that number. Therefore 12 is being multiplied by 16. When we multiply these we get 192. We then added the results in the results column to get our decimal equivalent number. Which is 201. Example 2 Convert Hex ABC to decimal Remember we raise the number sixteen to zero for the rightmost bit of the question. As we move across the numbers and letter in the question the power 16 is raised to is 1 more than the previous bit. For example, if we had a number with 22 bits the leftmost bit would be multiplied by sixteen to the power of 21. Multiplication Result C = 12 * (16 ^ 0) 12 B = 11 * (16 ^ 1) 176 A = 10 * (16 ^ 2) 2560 Answer = 2560 + 176 + 12 = 274810 decimal
+
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+
+
+                                    <b> Binary to Decimals </b>
+                                    <br /> The binary ("base two") numerical system has two possible values, often represented as 0 or 1, for each place-value. In contrast, the decimal (base ten) numeral system has ten possible values (0,1, 2, 3, 4, 5, 6, 7, 8, or 9) for each place-value. To avoid confusion while using different numeral systems, the base of each individual number may be specified by writing it as a subscript of the number. For example, the binary number 10011100 may be specified as "base two" by writing it as 100111002. The decimal number 156 may be written as 15610 and read as "one hundred fifty-six, base ten". Binary to Hex Step 1: Acquire your binary or hex number that you would like to convert. Lets pick a random binary number, say 11010001. If you refer to the tutorial above, you would know that the binary number is 209 in decimal but we want to go to hex. Break the binary number into groups of 4 starting from the right side to the left. The groups would be: 1101 0001 Step 2: Match the number of that group to the corresponding hex value. The group on the left hand side, 1101, is equal to 13 in decimal. If you refer to the hex chart above, you will see that 13 in decimal equals "D". So that group of 4 is D. The second group is 0001 or just plain 1. 1 is the same across each three numbering systems so that group would simply be 1. Combine those two values and you have D1 which is the correct answer.
+
+
+
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+
+
+                                    <b>Hex to Binary </b>
+                                    <br /> Since hexadecimal is base sixteen, the "place values" correspond to the powers of sixteen. To convert to decimal, multiply each place value by the corresponding power of sixteen. Start this process by writing the powers of sixteen next to the digits of a hexadecimal number. We'll do this for the hexadecimal number C92116. Start on the right with 160, and increase the exponent each time you move left to the next digit:
+                                </p>
+                                <!-- THIS IS WHERE TAB THREE STUFF ENDS -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <footer class="container-fluid text-center">
+        <p>David Heiser <sub>Lead Developer</sub> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; Matthew Knapper <sub>Mentor</sub></p>
+    </footer>
+
+</body>
+
+</html>
